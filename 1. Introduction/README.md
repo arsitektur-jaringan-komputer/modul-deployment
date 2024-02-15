@@ -27,4 +27,11 @@ berikut ada beberapa jenis dari application stack: <br>
 ### 1. The MEAN Stack
 The MEAN stack development  adalah singkatan dari MongoDB, ExpressJS, AngularJS, dan Node.js. Ini adalah salah satu teknologi stack paling populer di pasar. Ini adalah stack JavaScript ujung ke ujung yang memungkinkan penggunaan satu bahasa di seluruh stack .
 Kita dapat menggunakan kembali kode di seluruh aplikasi sehingga mengurangi upaya yang diperlukan dalam penemuan kembali seluruh kode. <br>
+<br>
 ![screenshot](mean.jpg) <br>
+<br>
+### Components of MEAN Stack
+■ MongoDB (Database Manager)
+■ ExpressJS (Server-side application framework to support the function of Node.js)
+■ Angular.js (Front end application framework)
+■ Node.js (Cross-platform JavaScript framework)
