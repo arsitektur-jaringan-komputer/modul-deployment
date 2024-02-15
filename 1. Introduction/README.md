@@ -14,4 +14,12 @@ Di bawah ini adalah diagram urutan sederhana tentang cara kerja deployment. <br>
   Sejauh kita mulai membandingkan application technology stack dengan makanan, perlu diperhatikan bahwa tumpukan ini juga menyerupai burger yang terdiri dari beberapa lapisan: dua bagian roti, daging panggang, selada, keju, dan sebagainya. Sama seperti burger, tumpukan teknologi terdiri dari beberapa lapisan teknologi yang saling berhubungan yang membentuk sebuah aplikasi. <br>
   <br>
   ![screenshot](AS1.jpg) <br>
-  
+  <br>
+  Sisi klien menampilkan semua yang dapat dilihat atau berinteraksi dengan pengguna di layar. Bagian aplikasi ini biasanya disebut front-end, dan dibuat dengan bantuan kerangka front-end dan bahasa markup seperti HTML, CSS, atau JavaScript. <br>
+
+Sisi server aplikasi bertukar data dengan sisi klien dan disebut backend. Biasanya, ini terdiri dari beberapa komponen, termasuk kerangka kerja, API, sistem manajemen basis data, dan server web. Namun, beberapa aplikasi mungkin terdiri dari beberapa layanan mikro. Jika demikian, ada kebutuhan untuk memilih teknologi sisi server yang sesuai untuk masing-masing teknologi tersebut.<br>
+
+Tumpukan teknologi aplikasi menentukan fungsionalitas produk dan apakah produk tersebut dapat ditingkatkan skalanya di masa mendatang. Hal ini juga mempengaruhi biaya pengembangan dan waktu yang dibutuhkan untuk membangun sebuah aplikasi. <br>
+
+
+
