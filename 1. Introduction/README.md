@@ -8,5 +8,5 @@ Status deployment juga dapat menyertakan 'description' opsional dan 'log_url', y
 <br> 
 Di bawah ini adalah diagram urutan sederhana tentang cara kerja deployment. <br>
 
-![screenshot](screenshot.png)
+![screenshot](diagram.png)
 ## Stack
