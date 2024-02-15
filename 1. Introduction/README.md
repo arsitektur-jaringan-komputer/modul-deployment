@@ -11,11 +11,7 @@ Di bawah ini adalah diagram urutan sederhana tentang cara kerja deployment. <br>
 ![screenshot](diagram.png.jpg) <br>
 ## Stack
   Application stack adalah rangkaian atau kumpulan program aplikasi yang membantu dalam melakukan tugas tertentu. Aplikasi-aplikasi ini saling terkait erat dan data dapat diekspor atau diimpor di antara aplikasi-aplikasi tersebut dengan langkah minimal. Banyak aplikasi perkantoran menyertakan pengolah kata, spreadsheet, database, dan utilitas email dalam satu tumpukan aplikasi. <br> 
-
-Berikut kelebihan dan kekurangan dari Application stack : <br>
-### 1. Kelebihan<br>
-* membantu mengelola data dengan metode LIFO
-* secara otomatis membersihkan objek
-* tidak mudah rusak
-* ukuran variabel tidak dapat diubah
-* mengontrol memori secara mandiri
+  Sejauh kita mulai membandingkan application technology stack dengan makanan, perlu diperhatikan bahwa tumpukan ini juga menyerupai burger yang terdiri dari beberapa lapisan: dua bagian roti, daging panggang, selada, keju, dan sebagainya. Sama seperti burger, tumpukan teknologi terdiri dari beberapa lapisan teknologi yang saling berhubungan yang membentuk sebuah aplikasi. <br>
+  <br>
+  ![screenshot](as1.jpg) <br>
+  
