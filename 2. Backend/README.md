@@ -68,7 +68,7 @@ sudo ufw allow 80
 sudo ufw allow 22
 ```
 
-![UFW Meme](Assets/ufw-meme.jpg)
+![UFW Meme](assets/ufw-meme.jpg)
 
 Untuk sekarang konfigurasi `ufw` sudah cukup, tapi jika nanti kalian menggunakan `SSL` berarti kalian perlu mengaktifkan akses untuk `HTTPS` atau port `443`. **Perlu diperhatikan karena kita bakal menginstal database atau aplikasi frontend yang berjalan diport tertentu, jika ingin diakses dari luar maka kita perlu mengizinkan (allow) dulu portnya di ufw**.
 
@@ -78,7 +78,7 @@ Selanjutnya jika kalian ingin mengakses laman dari Nginx, dapat dilakukan dengan
 http://<ip_address or domain>
 ```
 
-![Halaman Nginx](Assets/nginx-1.png)
+![Halaman Nginx](assets/nginx-1.png)
 
 ## MySQL
 
@@ -98,7 +98,7 @@ Untuk mengakses console mysql, cukup menggunakan perintah:
 sudo mysql
 ```
 
-![MySQL Console](Assets/mysql-1.png)
+![MySQL Console](assets/mysql-1.png)
 
 #### Membuat Database
 
@@ -112,7 +112,7 @@ CREATE DATABASE laravel;
 SHOW DATABASES;
 ```
 
-![Show Database](Assets/mysql-2.png)
+![Show Database](assets/mysql-2.png)
 
 Selanjutnya kita perlu membuat user baru dan memberikan akses ke databasenya.
 
