@@ -6,9 +6,20 @@
 
 ## Table of Contents
 
-## LEMP (Laravel, Nginx, MySQL & PHP) Stack
-
-LEMP stack adalah sekumpulan perangkat lunak yang dapat digunakan untuk menyajikan laman web dan aplikasi web dinamis yang ditulis dalam PHP. Ini adalah akronim yang mendeskripsikan sistem operasi Linux, dengan web server Nginx (diucapkan seperti “Engine-X”). Data backend disimpan di dalam database MySQL, dan pemrosesan dinamis ditangani oleh PHP.
+- [Backend Deployment](#backend-deployment)
+    - [LEMP](#lemp-laravel-nginx-mysql--php-stack)
+    - [Nginx](#web-server-nginx)
+        - [Instalasi Nginx](#instalasi-nginx)
+        - [UFW](#ufw-simple-setup)
+    - [MySQL](#mysql)
+        - [Instalasi MySQL](#instalasi-mysql)
+        - [Setup Database & User](#setup-database--user)
+    - [PHP](#php)
+        - [Instalasi PHP](#instalasi-php)
+        - [Setup Laravel Project](#setup-laravel-project)
+            - [Clone Project](#clone-project)
+            - [Composer](#composer)
+            - [Artisan](#artisan)
 
 Prasyarat untuk modul ini, kalian perlu mengakses ke server pastinya sebagai `sudo` non-root reguler.
 
@@ -155,7 +166,7 @@ sudo git clone https://github.com/elshiraphine/be-todo.git && cd be-todo
 
 #### Composer
 
-Apa itu `composer`? Composer adalah sebuah tools manajemen dependensi untuk bahasa pemrograman PHP. Dalam konteks pemrograman, Composer adalah sebuah aplikasi yang digunakan untuk mengelola dan mengatur dependensi seperti library, framework, atau paket lain yang diperlukan dalam proyek PHP.
+Apa itu `composer`? `Composer` adalah sebuah tools manajemen dependensi untuk bahasa pemrograman PHP. Dalam konteks pemrograman, Composer adalah sebuah aplikasi yang digunakan untuk mengelola dan mengatur dependensi seperti library, framework, atau paket lain yang diperlukan dalam proyek PHP.
 
 #### Install
 
@@ -179,6 +190,8 @@ sudo php composer-setup.php --install-dir=/usr/bin --filename=composer
 
 #### Artisan
 
-Artisan adalah sebuah file yang berisi command-line interface (CLI) yang disediakan oleh Laravel untuk membantu pengembangan aplikasi dengan menyediakan berbagai perintah yang dapat digunakan untuk melakukan tugas-tugas umum seperti membuat model, controller, migrasi database, menjalankan unit test, dan masih banyak lagi.
+`Artisan` adalah sebuah file yang berisi command-line interface (CLI) yang disediakan oleh Laravel untuk membantu pengembangan aplikasi dengan menyediakan berbagai perintah yang dapat digunakan untuk melakukan tugas-tugas umum seperti membuat model, controller, migrasi database, menjalankan unit test, dan masih banyak lagi.
+
+#### Membuat Project Environment
 
 
