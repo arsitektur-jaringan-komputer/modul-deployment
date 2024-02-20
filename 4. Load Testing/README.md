@@ -117,3 +117,148 @@ Berikut contoh error.log pada nginx:
 ![Error-Log](./assets/error-log-nginx.png)
 
 ## Implementasi
+
+Pada Implementasi ini akan mempraktekkan semua yang telah dijelaskan diatas dan juga akan didokumentasikan lebih jelas.
+
+Untuk implmentasi ini akan menggunakan 3 buah server, yaitu server yang pertama akan berperan sebagai Reverse Proxy dan Load Balancer, sedangkan server yang lain akan berperan sebagai webserver yang akan di load balancing.
+
+Untuk Topologinya adalah sebagai berikut:
+
+![Topologi](./assets/Topologi.png)
+
+Dimana disini kita akan memiliki 2 webserver yang akan di load balancing, dan juga sudah memiliki 1 server yang akan berperan sebagai Reverse Proxy dan Load Balancer.
+
+Ini untuk 2 web server yang sudah tersedia, terlihat bahwa keduanya memiliki ip yang berbeda:
+
+![Web Server](./assets/ss%20web.png)
+
+**Langkah-langkah Implementasi**
+
+Pada implementasi ini akan menggunakan Nginx sebagai Reverse Proxy dan Load Balancer, dan juga akan menggunakan Apache Benchmark dan Jmeter untuk melakukan Load Testing.
+
+Step 1 - Instalasi Nginx pada Reverse Proxy dan Load Balancer
+
+sebelum menginstal Nginx, pastikan untuk melakukan update terlebih dahulu dan jangan lupa pake sudo :)
+
+```bash
+sudo apt-get update
+sudo apt-get install nginx
+```
+
+Step 2 - Konfigurasi Nginx sebagai Reverse Proxy dan Load Balancer
+
+Setelah Nginx terinstal, selanjutnya adalah melakukan konfigurasi Nginx sebagai Reverse Proxy dan Load Balancer. Konfigurasi Nginx ini akan dilakukan pada file `/etc/nginx/sites-available`
+
+```nginx
+map $http_upgrade $connection_upgrade {
+ default upgrade;
+ ''      close;
+}
+
+upstream backend {
+ server 172.31.38.137:9000; # worker1
+ server 172.31.19.34:9000; # worker2
+}
+
+upstream frontend {
+ server 172.31.38.137:3000; # worker1
+ server 172.31.19.34:3000; # worker2
+}
+
+server {
+     listen 80;
+     server_name localhost;
+
+     location /api {
+         proxy_pass http://backend/api;
+         proxy_redirect off;
+         proxy_set_header Host $host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_set_header X-Forwarded-Proto $scheme;
+         proxy_set_header Upgrade $http_upgrade;
+         proxy_set_header Connection $connection_upgrade;
+
+         add_header 'Access-Control-Allow-Origin' '*' always;
+         add_header 'Access-Control-Allow-Methods' '*' always;
+         add_header 'Access-Control-Allow-Headers' '*' always;
+
+         access_log /var/log/nginx/be_access.log;
+         error_log /var/log/nginx/be_error.log;
+     }
+
+     location / {
+         proxy_pass http://frontend;
+         proxy_redirect off;
+         proxy_set_header Host $host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_set_header X-Forwarded-Proto $scheme;
+         proxy_set_header Upgrade $http_upgrade;
+         proxy_set_header Connection $connection_upgrade;
+         proxy_set_header X-Backend-Server $upstream_addr;
+
+         access_log /var/log/nginx/fe_access.log;
+         error_log /var/log/nginx/fe_error.log;
+     }
+}
+```
+
+Tenang aja, saya akan jelaskan sedikit tentang konfigurasi diatas.
+
+- `map $http_upgrade $connection_upgrade` adalah konfigurasi untuk mengatur koneksi upgrade pada Nginx.
+- `upstream backend` dan `upstream frontend` adalah konfigurasi untuk menentukan kumpulan server mana saja yang akan di load balancing (server pool), dimana disini dibedakan antara backend dan frontend. Dimana yang sudah dijelaskan pada modul sebelumnya bahwa backend di deploy dengan port 9000 pada setiap server dan frontend di deploy dengan port 3000 pada setiap server. dan setiap server harus dituliskan dengan didepannya adalah kata `server` dan diikuti dengan ip server dan port server.
+- `listen 80` adalah konfigurasi untuk mendengarkan request yang masuk pada port 80.
+- `server_name` adalah konfigurasi untuk menentukan server name yang akan di handle oleh konfigurasi ini (biasanya akan diisi dengan nama domain yang tersedia namun jika tidak ada dapat diisi dengan localhost saja).
+- `location` adalah Konfigurasi untuk menangani permintaan yang masuk ke URL sehingga setiap reuest dengan url sesuai dengan location tersebut akan dilakukan pengondisian sesuai dengan konfigurasi yang ada.
+- `proxy_pass`: Permintaan akan diteruskan ke grup server yang sesuai dengan server pool yang ada pada upstream.
+- `proxy_redirect off;`: Tidak ada pengalihan URL yang akan dilakukan oleh proxy.
+- `access_log` dan `error_log` untuk pencatatan log aktivitas dan kesalahan setiap percobaan akses.
+
+Jadi setiap request dengan url `/api` akan diteruskan ke server pool backend, dan setiap request dengan url `/` akan diteruskan ke server pool frontend.
+
+Kalian juga dapat menambahkan parameter tambahan pada upstream seperti `weight` untuk menentukan bobot dari setiap server, sesuai dengan teori yang dijelasakan sebelumnya yaitu `Weighted Round Robin`. Selain itu dapat juga menambahkan algoritma lain seperti `least_conn`, `ip_hash`, dll.
+
+```nginx
+# jika menggunakan weight round robin
+upstream backend {
+ server 172.31.38.137:9000 weight=1; # worker1
+ server 172.31.19.34:9000 weight=2; # worker2
+}
+
+upstream frontend {
+ server 172.31.38.137:3000 weight=1; # worker1
+ server 172.31.19.34:3000 weight=2; # worker2
+}
+
+# jika menggunkaan least connections
+upstream backend {
+ least_conn;
+ server 172.31.38.137:9000 weight=1; # worker1
+ server 172.31.19.34:9000 weight=2; # worker2
+}
+
+upstream frontend {
+ least_conn;
+ server 172.31.38.137:3000; # worker1
+ server 172.31.19.34:3000; # worker2
+}
+
+# jika menggunakan ip hash
+
+upstream backend {
+ ip_hash;
+ server 172.31.38.137:9000; # worker1
+ server 172.31.19.34:9000; # worker2
+}
+
+upstream frontend {
+ ip_hash;
+ server 172.31.38.137:3000; # worker1
+ server 172.31.19.34:3000; # worker2
+}
+```
+
+namun jika tidak dituliskan maka secara default akan menggunakan algoritma `Round Robin`.
+
+Step 3 - Konfigurasi Nginx sebagai Reverse Proxy dan Load Balancer
