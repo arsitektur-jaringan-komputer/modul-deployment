@@ -20,6 +20,7 @@
             - [Clone Project](#clone-project)
             - [Composer](#composer)
             - [Artisan](#artisan)
+            - [Nginx Backend](#konfigurasi-nginx-backend)
 
 Prasyarat untuk modul ini, kalian perlu mengakses ke server pastinya sebagai `sudo` non-root reguler.
 
@@ -164,6 +165,13 @@ cd /var/www
 sudo git clone https://github.com/elshiraphine/be-todo.git && cd be-todo
 ```
 
+#### Ubah Permission
+
+```bash
+sudo chmod -R 775 .
+sudo chown -R www-data:www-data .
+```
+
 #### Composer
 
 Apa itu `composer`? `Composer` adalah sebuah tools manajemen dependensi untuk bahasa pemrograman PHP. Dalam konteks pemrograman, Composer adalah sebuah aplikasi yang digunakan untuk mengelola dan mengatur dependensi seperti library, framework, atau paket lain yang diperlukan dalam proyek PHP.
@@ -193,5 +201,110 @@ sudo php composer-setup.php --install-dir=/usr/bin --filename=composer
 `Artisan` adalah sebuah file yang berisi command-line interface (CLI) yang disediakan oleh Laravel untuk membantu pengembangan aplikasi dengan menyediakan berbagai perintah yang dapat digunakan untuk melakukan tugas-tugas umum seperti membuat model, controller, migrasi database, menjalankan unit test, dan masih banyak lagi.
 
 #### Membuat Project Environment
+
+Masih di direktori `/var/www/be-todo`, kita akan menjalankan beberapa perintah.
+
+```bash
+cp .env.example .env
+```
+
+Edit file `.env`
+
+```bash
+nano .env
+```
+
+```bash
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+LOG_CHANNEL=stack
+LOG_LEVEL=debug
+LOG_DEBUG=true
+
+DB_CONNECTION=mysql
+DB_HOST=<IP_LB>
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=<USERNAME>
+DB_PASSWORD=<PASSWORD>
+```
+
+Jalankan beberapa perintah menggunakan `artisan`
+
+```bash
+php artisan key:generate
+php artisan migrate
+```
+
+#### Konfigurasi Nginx Backend
+
+
+```bash
+sudo nano /etc/nginx/sites-available/backend
+```
+
+```bash
+server {
+        root /var/www/be-todo/public;
+        index index.php index.html index.htm index.nginx-debian.html;
+
+        server_name localhost;
+        listen 9000;
+
+        access_log /var/log/nginx/be_access.log;
+        error_log /var/log/nginx/be_error.log;
+
+        # CORS Configuration
+        add_header 'Access-Control-Allow-Origin' '*' always;
+        add_header 'Access-Control-Allow-Methods' '*' always;
+        add_header 'Access-Control-Allow-Headers' '*' always;
+
+        location / {
+                try_files $uri $uri/ /index.php?$query_string;
+        }
+
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        }
+
+        location ~ /\.ht {
+                deny all;
+        }
+}
+```
+
+Membuat symlink
+
+```bash
+sudo ln -s /etc/nginx/sites-available/backend /etc/nginx/sites-enabled
+sudo service nginx restart
+```
+
+Selanjutnya coba akses backend menggunakan curl:
+
+```bash
+curl http://localhost:9000
+```
+
+atau melalui browser
+
+```bash
+http://IP_WORKER:9000
+```
+
+#### Troubleshooting
+
+##### - default page dari Nginx masih muncul
+
+```bash
+sudo unlink /etc/nginx/sites-enaled/default
+```
+
+
 
 
