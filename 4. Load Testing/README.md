@@ -136,13 +136,15 @@ Ini untuk 2 web server yang sudah tersedia, terlihat bahwa keduanya memiliki ip 
 
 Pada implementasi ini akan menggunakan Nginx sebagai Reverse Proxy dan Load Balancer, dan juga akan menggunakan Apache Benchmark dan Jmeter untuk melakukan Load Testing.
 
-Step 1 - Instalasi Nginx pada Reverse Proxy dan Load Balancer
+Step 1 - Instalasi Tools
 
-sebelum menginstal Nginx, pastikan untuk melakukan update terlebih dahulu dan jangan lupa pake sudo :)
+sebelum menginstal, pastikan untuk melakukan update terlebih dahulu dan jangan lupa pake sudo :)
 
 ```bash
 sudo apt-get update
 sudo apt-get install nginx
+sudo apt-get install apache2-utils
+sudo apt-get install htop
 ```
 
 Step 2 - Konfigurasi Nginx sebagai Reverse Proxy dan Load Balancer
@@ -261,4 +263,60 @@ upstream frontend {
 
 namun jika tidak dituliskan maka secara default akan menggunakan algoritma `Round Robin`.
 
-Step 3 - Konfigurasi Nginx sebagai Reverse Proxy dan Load Balancer
+Step 3 - Restart Nginx
+
+Setelah melakukan konfigurasi, selanjutnya adalah melakukan reload pada Nginx agar konfigurasi yang sudah diubah dapat dijalankan.
+
+```bash
+sudo service nginx restart
+```
+
+jika ada error saat setelah selsai melakukan konfigurasi, maka dapat di cek dengan perintah `sudo nginx -t` untuk mengecek apakah konfigurasi yang sudah diubah sudah benar atau belum.
+
+Step 4 - Load Testing dengan Apache Benchmark
+
+Setelah melakukan konfigurasi, maka reverse proxy yang sekaligus load balancer seharusnya sudah berjalan. Selanjutnya adalah melakukan load testing dengan Apache Benchmark.
+
+```apache
+ab -n 1000 -c 100 http://google.com/
+
+# nama domain dapat diganti dengan ip address dari server
+# contoh dibawah adalah untuk testing pada server yang telah dikonfigurasi sebelumnya.
+
+ab -n 1000 -c 100 http://54.191.235.169/api
+```
+
+Dimana `-n` adalah jumlah total request yang akan dilakukan, dan `-c` adalah jumlah koneksi yang akan dilakukan secara bersamaan.
+
+Bersamaan dengan melakuan load testing, kita juga dapat melakukan monitoring pada server dengan menggunakan `HTOP`.
+
+```bash
+htop
+```
+
+Step 5 - Cek Log file setelah Load Testing Apache Benchmark
+
+Setelah melakukan load testing, maka kita dapat melihat log file yang ada pada server untuk mengetahui aktivitas yang terjadi pada server.
+
+```bash
+cat /var/log/nginx/fe_access.log # log file frontend
+cat /var/log/nginx/be_access.log # log file backend
+# path log sesuai dengan konfigurasi pada nginx yang sudah dijelaskan sebelumnya.
+```
+
+Berikut contoh log file hasil dari load testing dengan Apache Benchmark pada server yang sudah dikonfigurasi sebelumnya:
+
+![Log-File](./assets/log%20file.png)
+
+```bash
+cat /var/log/nginx/be_access.log | wc -l
+```
+
+yang artinya adalah jumlah request yang masuk pada server backend. karena setiap request akan tercatat menjadi satu baris pada log file.
+
+Terlihat bahwa semua request yaitu 1000 request melewati server reverse proxy terlebih dahulu dan kemudian di load balancing ke 2 server backend, Sehingga terbagi rata antara kedua server backend yaitu masing-masing 500.
+
+Step 6 - Load Testing dengan JMeter
+
+Selain menggunakan Apache Benchmark, kita juga dapat melakukan load testing dengan menggunakan JMeter. JMeter adalah tools yang digunakan untuk melakukan load testing pada berbagai protokol seperti HTTP, HTTPS, FTP, JDBC, LDAP, dan masih banyak lagi.
+
