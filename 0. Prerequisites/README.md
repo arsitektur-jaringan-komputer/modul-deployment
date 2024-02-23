@@ -15,7 +15,7 @@
 
 Topologi yang akan kita gunakan pada pelatihan kali ini adalah seperti berikut:
 
-![Topologi](https://private-user-images.githubusercontent.com/69733783/303789762-1ff31e91-3466-46c5-81f7-a384a3233b5e.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDc1MTc3NzEsIm5iZiI6MTcwNzUxNzQ3MSwicGF0aCI6Ii82OTczMzc4My8zMDM3ODk3NjItMWZmMzFlOTEtMzQ2Ni00NmM1LTgxZjctYTM4NGEzMjMzYjVlLmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAyMDklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMjA5VDIyMjQzMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTc3NTE5ZDJiODkxNGExM2E2NDc4NzYyZDlhYjk5ZGI3YmU1YmI0ODE1OWFkNDI5N2EyM2JjYTA5ZTE3ZDc2NzUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.EguOk2RcLioPDnOu2OPxu5m1OavDtaD7ZzVQEuwfDGw)
+![Topologi](assets/topologi.jpg)
 
 Dimana topologi atau arsitektur yang kita gunakan, bakalan terdiri dari 3 VM atau instances.
 
@@ -54,23 +54,43 @@ Requirements:
 
 Download Vagrant file melalui link berikut:
 
-Virtual Box:
+Untuk Virtual Box:
 
 ```bash
-wget
+wget https://raw.githubusercontent.com/danielcristho/modul-deployment/master/0.%20Prerequisites/vagrant/Vagrantfile-Vbox -O Vagrantfile
 ```
 
-VMWare:
+Untuk VMWare:
 
 ```bash
-wget
+wget https://raw.githubusercontent.com/danielcristho/modul-deployment/master/0.%20Prerequisites/vagrant/Vagrantfile-VMWare -O Vagrantfile
 ```
 
 Catatan:
-- Pastikan kalian menginstall plugin untuk VMWare: `vagrant plugin install vagrant-vmware`
 
+- Pastikan kalian menginstall plugin untuk VMWare: `vagrant plugin install vagrant-vmware`
+- untuk mematikan vm gunakan perintah `vagrant halt`
+- Jangan Lupa mengatur IP di interface `Host-Only` menjadi Static : 192.168.1.1
+
+#### Virtual Box
+
+![IP Static Virtual Box](assets/static-ip-vbox.gif)
+
+#### VMWare Workstation
+
+![IP Static VMWare](assets/static-ip-vmware.gif)
 
 ### Clone VM
+
+Silahkan baca modul [Prerequisites Pelatihan Linux](https://github.com/arsitektur-jaringan-komputer/Pelatihan-Linux/tree/master/0.%20Prerequisites) untuk menginstall Ubuntu di VM. Jika sudah kalian bisa meng-clone VM sesuai dengan aplikasi yang digunakan.
+
+#### 1. Virtual Box
+
+![Clone VM Virtual Box](assets/clone-vm-vbox.gif)
+
+#### 2. VMWare
+
+![Clone VM VMWare](assets/clone-vm-ware.gif)
 
 ## Basic Command
 
