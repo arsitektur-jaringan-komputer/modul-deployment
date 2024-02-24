@@ -8,7 +8,9 @@
 
 1. [Topologi](#topologi)
 2. [Akses Instance](#akses-instance)
-3. [Membuat VM di Virtual Box dan VMWare Workstation]()
+3. [Membuat VM di Virtual Box dan VMWare Workstation](#membuat-vm-di-membuat-vm-di-virtual-box-dan-vmware-workstation)
+    - [Menggunakan Vagrant](#menggunakan-vagrant)
+    - [Clone VM](#clone-vm)
 4. [Basic Command](#basic-command)
 
 ## Topologi
@@ -49,10 +51,14 @@ Untuk mempercepat pembuatan VM baik di Virtual Box atau VMWare Workstation kalia
 
 Requirements:
 
-- [Vagrant >= 2.4.1](https://developer.hashicorp.com/vagrant/install)
-- Virtual Box atau VMWare Workstation
+- [ ] Install [Vagrant >= 2.4.1](https://developer.hashicorp.com/vagrant/install)
+- [ ] Install Virtual Box atau VMWare Workstation
+- [ ] Silahkan membaca modul [LBE-AJK-2022](https://github.com/arsitektur-jaringan-komputer/lbe-ajk-2022/tree/master/Modul%202#vagrant) untuk langkah-langkah menginstall Vagrant.
+- [ ] Pastikan kalian menginstall plugin untuk VMWare: `vagrant plugin install vagrant-vmware`
+- [ ] Jangan Lupa mengatur IP di interface `Host-Only` menjadi Static : 192.168.1.1
+- [ ] Harap memakai WSL untuk menggunakan command `wget`, jika memakai CMD harap menginstall wget terlebih dahulu: [Install Wget Windows](https://www.niagahoster.co.id/blog/contoh-penggunaan-wget-command/)
 
-Download Vagrant file melalui link berikut:
+- Download Vagrant file melalui link berikut:
 
 Untuk Virtual Box:
 
@@ -66,11 +72,18 @@ Untuk VMWare:
 wget https://raw.githubusercontent.com/danielcristho/modul-deployment/master/0.%20Prerequisites/vagrant/Vagrantfile-VMWare -O Vagrantfile
 ```
 
+- Selanjutnya jalankan command `vagrant up` untuk membuat vm menggunakan vagrant.
+
+![Vagrant Up](assets/vagrant-up.png)
+
+- Selanjutnya untuk mengakses VM yang telah dibuat, bisa menggunakan command `vagrant ssh <hostname_vm>`.
+
+![Vagrant SSH](assets/vagrant-ssh.gif)
+
 Catatan:
 
-- Pastikan kalian menginstall plugin untuk VMWare: `vagrant plugin install vagrant-vmware`
-- untuk mematikan vm gunakan perintah `vagrant halt`
-- Jangan Lupa mengatur IP di interface `Host-Only` menjadi Static : 192.168.1.1
+- Untuk mematikan VM bisa menggunakan command `vagrant halt`.
+- Untuk destroy VM bisa menggunakan command `vagrant destroy`
 
 #### Virtual Box
 
@@ -95,4 +108,3 @@ Silahkan baca modul [Prerequisites Pelatihan Linux](https://github.com/arsitektu
 ## Basic Command
 
 Silahkan membaca modul **[Pelatihan Linux](https://github.com/arsitektur-jaringan-komputer/Pelatihan-Linux)**.
-

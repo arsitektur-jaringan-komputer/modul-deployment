@@ -201,3 +201,10 @@ MEVN stack sangat populer dalam pengembangan aplikasi web karena kombinasi tekno
 Dengan menggunakan MEVN stack, pengembang dapat membangun aplikasi web yang lengkap, mulai dari sisi server hingga antarmuka pengguna, dengan menggunakan satu bahasa pemrograman yaitu JavaScript. Ini memungkinkan pengembangan yang lebih cepat dan efisien, serta memudahkan pengelolaan kode dan pemeliharaan aplikasi.
 
 MEVN stack sangat populer dalam pengembangan aplikasi web karena kombinasi teknologi yang kuat dan fleksibel. MongoDB menyediakan basis data yang skalabel dan mudah digunakan, Express.js menyediakan kerangka kerja yang ringan dan efisien, Vue.js memungkinkan pengembangan UI yang interaktif, dan Node.js memungkinkan pengembangan aplikasi web yang cepat dan efisien.
+
+Referensi:
+
+- https://www.sepulsa.com/blog/deployment-itu-apa-sih-yuk-simak
+- https://revou.co/kosakata/deployment
+- https://github.com/arsitektur-jaringan-komputer/lbe-ajk-2022/tree/master/Modul%203
+- https://glints.com/id/lowongan/lamp-server-adalah
