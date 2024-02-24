@@ -5,7 +5,8 @@
 </div>
 
 ## Table of Contents
-1. Package Installation
+1. [Package Installation](#package-installation)
+2. [pm2 Setup](#pm2-setup)
 
 
 ### Package Installation
@@ -47,3 +48,29 @@ Selanjutnya lakukan instalasi `pm2`. `pm2` ini adalah *process manager* untuk ap
 sudo aot install npm
 npm install pm2 -g
 ```
+
+### pm2 Setup
+
+Langkah selanjutnya adalah melakukan setup pada `pm2`. Sebelum melakukan setup `pm2` lakukan instalasi package dan build pada repo.
+
+Lakukan *change directory* pada `/var/www/fe-todo`
+
+```sh
+cd /var/www/fe-todo
+```
+
+Kemudian gunakan perintah `yarn install && yarn build`. Perintah tersebut setelah dijalankan akan menampilkan berikut:
+
+![install](assets/yarn_install.png)
+
+![build](assets/yarn_build.png)
+
+Kemudian, jalankan perintah berikut untuk membuat proses
+
+```sh
+pm2 start --name fe-todo "yarn start"
+```
+
+Hasilnya adalah sebagai berikut:
+
+![pm2](assets/pm2.png)
