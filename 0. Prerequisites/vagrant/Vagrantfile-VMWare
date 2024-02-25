@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "gusztavvargadr/ubuntu-server"
   config.vm.disk :disk, size: "20GB", primary: true
   config.ssh.insert_key = false
-  config.vm.provider :vmware_desktop do |v|
+  config.vm.provider :"vmware_desktop" do |v|
 
     # Customize the amount of memory on the VM:
     v.memory = 2048

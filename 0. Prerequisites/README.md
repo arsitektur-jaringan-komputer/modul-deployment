@@ -105,6 +105,13 @@ Silahkan baca modul [Prerequisites Pelatihan Linux](https://github.com/arsitektu
 
 ![Clone VM VMWare](assets/clone-vm-ware.gif)
 
+#### Catatan
+
+- Gunakan network adapter `NAT` dan `Host-Only` disetiap VM.
+
+![Setup Network Adapter di VMWare](assets/vmware-network.gif)
+![Setup Network Adapter di Virtual Box](assets/vbox-network.gif)
+
 ## Basic Command
 
 Silahkan membaca modul **[Pelatihan Linux](https://github.com/arsitektur-jaringan-komputer/Pelatihan-Linux)**.
