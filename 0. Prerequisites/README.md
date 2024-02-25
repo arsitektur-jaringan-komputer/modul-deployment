@@ -9,8 +9,7 @@
 1. [Topologi](#topologi)
 2. [Akses Instance](#akses-instance)
 3. [Membuat VM di Virtual Box dan VMWare Workstation](#membuat-vm-di-membuat-vm-di-virtual-box-dan-vmware-workstation)
-    1. [Menggunakan Vagrant](#menggunakan-vagrant)
-    2. [Clone VM](#clone-vm)
+    1. [Clone VM](#clone-vm)
 4. [Basic Command](#basic-command)
 
 ## Topologi
@@ -47,7 +46,7 @@ B. SSH Menggunakan Linux
 
 Untuk mempercepat pembuatan VM baik di Virtual Box atau VMWare Workstation kalian bisa mengikuti langkah-langkah berikut.
 
-### 1. Menggunakan Vagrant
+<!-- ### 1. Menggunakan Vagrant
 
 Requirements:
 
@@ -91,11 +90,11 @@ Catatan:
 
 #### Konfigurasi IP VMWare Workstation
 
-![IP Static VMWare](assets/static-ip-vmware.gif)
+![IP Static VMWare](assets/static-ip-vmware.gif) -->
 
-### 2. Clone VM
+### 1. Clone VM
 
-Silahkan baca modul [Prerequisites Pelatihan Linux](https://github.com/arsitektur-jaringan-komputer/Pelatihan-Linux/tree/master/0.%20Prerequisites) untuk menginstall Ubuntu di VM. Jika sudah kalian bisa meng-clone VM sesuai dengan aplikasi yang digunakan.
+Silahkan baca modul [Prerequisites Pelatihan Linux](https://github.com/arsitektur-jaringan-komputer/Pelatihan-Linux/tree/master/0.%20Prerequisites) untuk menginstall Ubuntu di VM terlebih dahulu. Jika sudah kalian bisa meng-clone VM yang dibuat sesuai dengan aplikasi yang digunakan.
 
 #### 1. Virtual Box
 
