@@ -9,8 +9,8 @@
 1. [Topologi](#topologi)
 2. [Akses Instance](#akses-instance)
 3. [Membuat VM di Virtual Box dan VMWare Workstation](#membuat-vm-di-membuat-vm-di-virtual-box-dan-vmware-workstation)
-    - [Menggunakan Vagrant](#menggunakan-vagrant)
-    - [Clone VM](#clone-vm)
+    1. [Menggunakan Vagrant](#menggunakan-vagrant)
+    2. [Clone VM](#clone-vm)
 4. [Basic Command](#basic-command)
 
 ## Topologi
@@ -43,19 +43,19 @@ B. SSH Menggunakan Linux
 
 ![Akses ke VM](https://private-user-images.githubusercontent.com/69733783/303817822-6280f468-7845-4de0-b9ab-9816f99c4d76.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDc1NDI5NzIsIm5iZiI6MTcwNzU0MjY3MiwicGF0aCI6Ii82OTczMzc4My8zMDM4MTc4MjItNjI4MGY0NjgtNzg0NS00ZGUwLWI5YWItOTgxNmY5OWM0ZDc2LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAyMTAlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMjEwVDA1MjQzMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTZhYjRlMzY4ZTk1NjZlMmJhZThiMWViOTAyNGM4NDc5MmMwYmM3MGJmMTg4YzJlYWI3MjgyZGM5MWUxNzEyZGMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.voz9Gzs_uWh0fQ7TRkrKMu1fkfq9We58aEsz3__GRvg)
 
-## Membuat VM di Membuat VM di Virtual Box dan VMWare Workstation
+## Membuat VM di Virtual Box dan VMWare Workstation
 
-Untuk mempercepat pembuatan VM baik di Virtual Box atau VMWare Workstation kalian bisa mengikuti langkah berikut.
+Untuk mempercepat pembuatan VM baik di Virtual Box atau VMWare Workstation kalian bisa mengikuti langkah-langkah berikut.
 
-### Menggunakan Vagrant
+### 1. Menggunakan Vagrant
 
 Requirements:
 
 - [ ] Install [Vagrant >= 2.4.1](https://developer.hashicorp.com/vagrant/install)
 - [ ] Install Virtual Box atau VMWare Workstation
 - [ ] Silahkan membaca modul [LBE-AJK-2022](https://github.com/arsitektur-jaringan-komputer/lbe-ajk-2022/tree/master/Modul%202#vagrant) untuk langkah-langkah menginstall Vagrant.
-- [ ] Pastikan kalian menginstall plugin untuk VMWare: `vagrant plugin install vagrant-vmware`
-- [ ] Jangan Lupa mengatur IP di interface `Host-Only` menjadi Static : 192.168.1.1
+- [ ] Pastikan kalian menginstall plugin untuk VMWare: `vagrant plugin install vagrant-vmware` dan utilitasnya: [`Vagrant VMware Utility`](https://developer.hashicorp.com/vagrant/install/vmware#windows)
+- [ ] Jangan Lupa mengatur IP di interface `Host-Only` menjadi Static : 192.168.1.1. Cek [disini](#konfigurasi-ip-static-virtual-box)
 - [ ] Harap memakai WSL untuk menggunakan command `wget`, jika memakai CMD harap menginstall wget terlebih dahulu: [Install Wget Windows](https://www.niagahoster.co.id/blog/contoh-penggunaan-wget-command/)
 
 - Download Vagrant file melalui link berikut:
@@ -85,15 +85,15 @@ Catatan:
 - Untuk mematikan VM bisa menggunakan command `vagrant halt`.
 - Untuk destroy VM bisa menggunakan command `vagrant destroy`
 
-#### Virtual Box
+#### Konfigurasi IP Static Virtual Box
 
 ![IP Static Virtual Box](assets/static-ip-vbox.gif)
 
-#### VMWare Workstation
+#### Konfigurasi IP VMWare Workstation
 
 ![IP Static VMWare](assets/static-ip-vmware.gif)
 
-### Clone VM
+### 2. Clone VM
 
 Silahkan baca modul [Prerequisites Pelatihan Linux](https://github.com/arsitektur-jaringan-komputer/Pelatihan-Linux/tree/master/0.%20Prerequisites) untuk menginstall Ubuntu di VM. Jika sudah kalian bisa meng-clone VM sesuai dengan aplikasi yang digunakan.
 
