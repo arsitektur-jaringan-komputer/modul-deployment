@@ -7,7 +7,6 @@
 ## Table of Contents
 
 - [Backend Deployment](#backend-deployment)
-    - [LEMP](#lemp-laravel-nginx-mysql--php-stack)
     - [Nginx](#web-server-nginx)
         - [Instalasi Nginx](#instalasi-nginx)
         - [UFW](#ufw-simple-setup)
@@ -23,6 +22,8 @@
             - [Nginx Backend](#konfigurasi-nginx-backend)
 
 Prasyarat untuk modul ini, kalian perlu mengakses ke server pastinya sebagai `sudo` non-root reguler.
+
+## LEMP Stack
 
 ## Web Server Nginx
 
@@ -278,6 +279,38 @@ server {
 }
 ```
 
+Catatan:
+
+`server`: Ini adalah blok awal yang menandakan dimulainya konfigurasi untuk server Nginx.
+
+`root`: Menentukan direktori root dari aplikasi web.
+
+`index`: Menentukan urutan file index yang akan ditemukan jika URL meminta sebuah direktori. Misalnya, jika ada permintaan ke direktori tanpa menyebutkan nama file, Nginx akan mencoba mencari file yang terdaftar dalam urutan ini, dan yang pertama ditemukan akan dikirimkan ke client.
+
+`server_name`: Menetapkan nama server yang digunakan.
+
+`listen`: Menentukan port yang akan dilisten oleh server.
+
+`access_log & error_log`: Menentukan lokasi file untuk logging akses dan error dari server Nginx.
+
+`add_header 'Access-Control-Allow-Origin' '*' always;`: Mengatur header HTTP untuk mengizinkan akses dari semua domain (*).
+
+`add_header 'Access-Control-Allow-Methods' '*' always;`: Mengatur header HTTP untuk mengizinkan semua metode HTTP (GET, POST, PUT dll).
+
+`add_header 'Access-Control-Allow-Headers' '*' always;`: Mengatur header HTTP untuk mengizinkan semua jenis header.
+
+`location /`: Mendefinisikan blok konfigurasi untuk URL dasar (root).
+
+`try_files $uri $uri/ /index.php?$query_string;`: Mencoba mencocokkan permintaan dengan file atau direktori. Jika tidak ditemukan, maka permintaan akan diarahkan ke index.php dengan query string yang diteruskan.
+
+`location ~ \.php$`: Mendefinisikan blok konfigurasi untuk file PHP.
+
+`include snippets/fastcgi-php.conf;`: Menggunakan konfigurasi FastCGI untuk menangani pemrosesan PHP.
+
+`fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;`: Menentukan lokasi soket FastCGI untuk meneruskan permintaan PHP.
+
+`location ~ /\.ht`: Mendefinisikan blok konfigurasi untuk file `.htaccess`
+
 Membuat symlink
 
 ```bash
@@ -297,14 +330,40 @@ atau melalui browser
 http://IP_WORKER:9000
 ```
 
-#### Troubleshooting
+#### Endpoint Backend
 
-##### - default page dari Nginx masih muncul
+GET
+
+- http://<ip_worker>:9000/api/
+
+POST
+
+- http://<ip_worker>:9000/api/register
 
 ```bash
-sudo unlink /etc/nginx/sites-enaled/default
+curl -X POST http://35.86.125.124:9000/api/register \
+-H "Content-Type: application/json" \
+-d '{"name":"admin","email": "admin@email.com", "password":"example_password"}'
+```
+
+Output:
+
+```bash
+{"code":200,"status":"success","data":{"name":"admin","email":"admin@email.com","password":"$2y$10$jZaBpSjlLYbJWy0xXJvGQ.aEddJCMUUngLnFDvt0c6PDxYPc8PEPa","updated_at":"2024-02-25T07:40:37.000000Z","created_at":"2024-02-25T07:40:37.000000Z","id":2},"links":{"self":"http:\/\/35.86.125.124:9000\/api\/register"},"meta":{"date_accessed":"2024-02-25T07:40:37+00:00","version":"1.0.0"}}
 ```
 
 
+#### Troubleshooting
 
+- Default page dari Nginx masih muncul
 
+```bash
+sudo unlink /etc/nginx/sites-enaled/default
+sudo service nginx restart
+```
+
+- `404 Not Found` - Pastikan kembali lokasi dari project laravel di `root` sudah sesuai.
+
+- `403 Forbidden` - Pastikan nama file yang ingin dipanggil dibagian index sudah benar atau bisa jadi karena [permissionnya](#ubah-permission).
+
+- `502 Bad Gateway` - Pastikan socket PHP yang digunakan pada server block sudah sesuai dengan versi PHP yang diinstal.
