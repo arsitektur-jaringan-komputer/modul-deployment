@@ -320,3 +320,55 @@ Step 6 - Load Testing dengan JMeter
 
 Selain menggunakan Apache Benchmark, kita juga dapat melakukan load testing dengan menggunakan JMeter. JMeter adalah tools yang digunakan untuk melakukan load testing pada berbagai protokol seperti HTTP, HTTPS, FTP, JDBC, LDAP, dan masih banyak lagi.
 
+Seperti yang dijelaskan diatas [Instalasi](#load-testing-dan-monitoring), setelah mendownload JMeter, dan pastikan sudah terinstall Java pada server dengan version minimal 8. maka selanjutnya kita dapat menjalankan JMeter dengan perintah berikut:
+
+pada linux :
+
+unzip file yang sudah didownload, lalu masuk ke direktori bin dan jalankan perintah berikut:
+
+```bash
+./jmeter
+```
+
+pada windows :
+
+extarct file zip yang telah di download, lalu buka file `jmeter.bat` yang ada pada direktori bin.
+
+Maka selanjutnya akan muncul tampilan JMeter seperti berikut:
+
+![JMeter](./assets/Jmeter.png)
+
+Selanjutnya adalah membuat test plan, dimana test plan ini akan berisi tentang konfigurasi dari load testing yang akan dilakukan. klik kanan pada `Test Plan` lalu pilih `Add` > `Threads (Users)` > `Thread Group`.
+
+![Thread-Group](./assets/thread-group.png)
+
+Selanjutnya adalah melakukan konfigurasi pada Thread Group, dimana disini kita akan mengatur jumlah thread (user) yang akan melakukan request, jumlah loop, dan waktu delay antar request.
+
+Dengan penjelasan sebagai berikut:
+
+- `Number of Threads (users)`: Jumlah thread yang akan melakukan request.
+- `Ramp-Up Period (in seconds)`: Waktu yang dibutuhkan untuk menambahkan jumlah thread yang akan melakukan request.
+- `Loop Count`: Jumlah request yang akan dilakukan oleh setiap thread.
+
+Lalu selanjutnya adalah menambahkan HTTP Request, dimana disini kita akan mengatur URL yang akan di request. Klik kanan pada `Thread Group` lalu pilih `Add` > `Sampler` > `HTTP Request`.
+
+![HTTP-Request](./assets/http-req.png)
+
+Selanjutnya adalah melakukan konfigurasi pada HTTP Request, dimana disini kita akan mengatur URL yang akan di request, metode request, port, dll.
+
+Lalu selanjutnya adalah menambahkan `Graph Result` untuk melihat hasil dari load testing yang sudah dilakukan. Klik kanan pada `Thread Group` lalu pilih `Add` > `Listener` > `Graph Results`.
+
+Selanjutnya klik tombol `Start` untuk memulai load testing.
+
+![Start-Test](./assets/graph-result.png)
+
+Setelah melakukan load testing, maka kita dapat melihat hasil dari load testing yang sudah dilakukan pada `Graph Result`.
+
+dengan penjelasan sebagai berikut:
+
+- Hitam: Jumlah total sampel yang dikirim saat ini.
+- Biru : Rata-rata saat ini dari semua sampel yang dikirim.
+- Merah : Standar deviasi saat ini.
+- Hijau : Tingkat throughput yang mewakili jumlah permintaan per menit yang ditangani server.
+
+Throughput adalah parameter yang paling penting. Ini mewakili kemampuan server untuk menangani beban berat. Semakin tinggi Throughputnya, semakin baik kinerja servernya. Deviasi ditunjukkan dalam warna merah - ini menunjukkan penyimpangan dari rata-rata. Semakin kecil semakin baik. Jika deviasi tinggi, ini menunjukkan bahwa server tidak konsisten dalam menangani permintaan.
