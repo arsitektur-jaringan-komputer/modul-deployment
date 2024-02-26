@@ -9,7 +9,7 @@
 1. [Topologi](#topologi)
 2. [Akses Instance](#akses-instance)
 3. [Membuat VM di Virtual Box dan VMWare Workstation](#membuat-vm-di-membuat-vm-di-virtual-box-dan-vmware-workstation)
-    1. [Clone VM](#clone-vm)
+   1. [Clone VM](#clone-vm)
 4. [Basic Command](#basic-command)
 
 ## Topologi
@@ -30,17 +30,21 @@ Untuk akses ke setiap VM atau instance kita bisa menggunakan `SSH (Secure Shell)
 
 A. SSH Menggunakan Windows
 
+1. Download file `.pem` pada link yang telah disediakan.
+
+2. Aktifkan fitur `OpenSSH` pada Windows 10 atau diatasnya. Buka `Control Panel` > `Programs` > `Programs and Features` > `Turn Windows features on or off` > Cari `OpenSSH Client` dan `OpenSSH Server` lalu centang. Atau jalankan `PowerShell` sebagai administrator lalu jalankan command `Add-WindowsCapability -Online -Name OpenSSH.Client`.
+
+3. Buka `Command Prompt` atau `PowerShell` dan jalankan command `ssh -i <file_pem> <username@ip_address>`.
+
+Namun untuk Windows 7 atau dibawahnya, kalian bisa menggunakan aplikasi seperti `PuTTY` untuk mengakses VM atau instance. Silahkan download aplikasi [PuTTY](https://www.putty.org/).
+
 B. SSH Menggunakan Linux
 
 1. Download file `.pem` pada link yang telah disediakan.
 
 2. Buka terminal atau console yang kalian miliki. Pastikan kalian membuka terminal di lokasi yang sama dengan file `.pem` yang telah didownload. Terakhir jalankan command `chmod 400 <file_pem>` untuk memberikan permission.
 
-![CHMOD](https://private-user-images.githubusercontent.com/69733783/303817314-1e45b1c5-3d30-44f7-9ebd-8a5da2677900.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDc1NDIwNTMsIm5iZiI6MTcwNzU0MTc1MywicGF0aCI6Ii82OTczMzc4My8zMDM4MTczMTQtMWU0NWIxYzUtM2QzMC00NGY3LTllYmQtOGE1ZGEyNjc3OTAwLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAyMTAlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMjEwVDA1MDkxM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTU1OTlmZDAzZjczM2ZlMWYxZTEyY2Y1ODZkYTQ1NTMyNWU1MDQ4NjI2ODk3NWE0ZGQ3ZGUwNGZiZTFlNzQ4Y2UmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.NtHy6PQhOuXMqevjxPSBvy2lB1O6Laj2Eb7zEVZ0bg8)
-
 3. Langkah terakhir yaitu akses ke VM atau instance menggunakan `.pem` file dengan menjalankan command `ssh -i <file_pem> <username@ip_address>`.
-
-![Akses ke VM](https://private-user-images.githubusercontent.com/69733783/303817822-6280f468-7845-4de0-b9ab-9816f99c4d76.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDc1NDI5NzIsIm5iZiI6MTcwNzU0MjY3MiwicGF0aCI6Ii82OTczMzc4My8zMDM4MTc4MjItNjI4MGY0NjgtNzg0NS00ZGUwLWI5YWItOTgxNmY5OWM0ZDc2LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAyMTAlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMjEwVDA1MjQzMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTZhYjRlMzY4ZTk1NjZlMmJhZThiMWViOTAyNGM4NDc5MmMwYmM3MGJmMTg4YzJlYWI3MjgyZGM5MWUxNzEyZGMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.voz9Gzs_uWh0fQ7TRkrKMu1fkfq9We58aEsz3__GRvg)
 
 ## Membuat VM di Virtual Box dan VMWare Workstation
 
