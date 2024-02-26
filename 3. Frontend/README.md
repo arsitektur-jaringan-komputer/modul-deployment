@@ -46,7 +46,7 @@ nvm alias default 18
 Selanjutnya lakukan instalasi `pm2`. `pm2` ini adalah *process manager* untuk aplikasi Node.js. Perintahnya adalah sebagai berikut:
 
 ```sh
-sudo aot install npm
+sudo apt install npm
 npm install pm2 -g
 ```
 
@@ -60,7 +60,7 @@ Lakukan *change directory* pada `/var/www/fe-todo`
 cd /var/www/fe-todo
 ```
 
-Kemudian gunakan perintah `yarn install && yarn build`. Perintah tersebut setelah dijalankan akan menampilkan berikut:
+Kemudian gunakan perintah `yarn install --ignore-engines && yarn build`. Perintah tersebut setelah dijalankan akan menampilkan berikut:
 
 ![install](assets/yarn_install.png)
 
@@ -85,7 +85,7 @@ Lakukan change directory pada `/etc/nginx/sites-available`. Kemudian buatlah kon
 ```
 server {
     listen 80;
-    server_name 35.92.62.167;
+    server_name _;
     access_log /var/log/nginx/fe_access.log;
     error_log /var/log/nginx/fe_error.log;
 
@@ -107,7 +107,7 @@ server {
 }
 ```
 
-Ubah `server_name` sesuai dengan ip masing-masing virtual machine. `proxy_pass` di sini akan melakukan passing dari alamat `http://localhost:3000` yang dijalankan oleh `pm2`.
+`proxy_pass` di sini akan melakukan passing dari alamat `http://localhost:3000` yang dijalankan oleh `pm2`.
 
 Kemudian simpan konfigurasi tersebut.
 
