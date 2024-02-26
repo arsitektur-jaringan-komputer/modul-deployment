@@ -46,7 +46,7 @@ nvm alias default 18
 Selanjutnya lakukan instalasi `pm2`. `pm2` ini adalah *process manager* untuk aplikasi Node.js. Perintahnya adalah sebagai berikut:
 
 ```sh
-sudo aot install npm
+sudo apt install npm
 npm install pm2 -g
 ```
 
